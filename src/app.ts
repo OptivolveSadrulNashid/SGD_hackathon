@@ -74,12 +74,21 @@ console.log('here is the request body');
             Order of effects (there might be multiple) and combined in a sentence in precise words as “order”;
             Dimension as “dimension” and combined in a sentence in precise words;
             As well as threats and opportunities and possible actions can be taken for the future.
-            in the following format: {
+            in the following format: 
+            body :{
+            company_name: "company name",
+            company_goals: "company goals",
+            company_mission: "company mission",
+            product_name: "product name",
+            product_description: "product description",
+          
+            {
               "feature": "feature name",
               "effect": "positive and negative impact",
               "order": "order of effect",
               "dimension": "dimension",
-            }`
+            }
+          }`
         }
     ]
     
