@@ -71,11 +71,16 @@ console.log('here is the request body');
             Some SusAF Questions and answers are ${qna}
             For more information.
             You have to provide me:
-            Incremental count “id” (index of the effect starting from 1);
-            The list of positive and negative impacts in precise words for each of the features as “effect”;
-            Order of effects (there might be multiple), as “order”;
-            Dimension (there might be multiple), as “dimension”;
-            As well as threats and opportunities and possible actions can be taken for the future.`
+            The list of positive and negative impacts combined in a sentence in precise words for each of the features as “effect”;
+            Order of effects, as “order”;
+            Dimension, as “dimension”;
+            As well as threats and opportunities and possible actions can be taken for the future.
+            in the following format: {
+              "feature": "feature name",
+              "effect": "positive and negative impact",
+              "order": "order of effect",
+              "dimension": "dimension",
+            }`
         }
     ]
     
