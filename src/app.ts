@@ -1,7 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import dotenv from "dotenv";
 import axios, { AxiosRequestConfig } from 'axios';
-
 const app = express();
 app.use(express.json()); //Used to parse JSON bodies
 dotenv.config(); //Reads .env file and makes it accessible via process.env
@@ -72,8 +71,8 @@ console.log('here is the request body');
             For more information.
             You have to provide me:
             The list of positive and negative impacts combined in a sentence in precise words for each of the features as “effect”;
-            Order of effects, as “order”;
-            Dimension, as “dimension”;
+            Order of effects (there might be multiple) and combined in a sentence in precise words as “order”;
+            Dimension as “dimension” and combined in a sentence in precise words;
             As well as threats and opportunities and possible actions can be taken for the future.
             in the following format: {
               "feature": "feature name",
