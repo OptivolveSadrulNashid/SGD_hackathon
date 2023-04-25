@@ -20,7 +20,7 @@ const pool = new Pool({
 const connectToDB = async () => {
   try {
     await pool.connect();
-    console.log("Connected with Digital Ocean DB!");
+    console.log("Swimming in Digital Ocean!");
   } catch (err) {
     console.log(err);
   }
