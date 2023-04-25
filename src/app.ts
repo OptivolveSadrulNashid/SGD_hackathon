@@ -1,36 +1,13 @@
 import express, { NextFunction, Request, Response } from "express";
 import dotenv from "dotenv";
-import { Pool } from "pg";
 import axios, { AxiosRequestConfig } from 'axios';
 
 const app = express();
 app.use(express.json()); //Used to parse JSON bodies
 dotenv.config(); //Reads .env file and makes it accessible via process.env
-const pool = new Pool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: parseInt(process.env.DB_PORT|| ""),
-  ssl: {
-    rejectUnauthorized: false,
-    ca: process.env.CACERT,
-  }
-});
-
-const connectToDB = async () => {
-  try {
-    await pool.connect();
-    console.log("Swimming in Digital Ocean!");
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-connectToDB();
 
 app.get("/hi", (req: Request, res: Response, next: NextFunction) => {
-  res.send("hi SGDs");
+  res.send("hi SDGs");
 });
 
 
@@ -61,6 +38,8 @@ async function openAiPostRequest(endpoint: string, requestData: any): Promise<an
 
 app.post("/api/susai", async (req: Request, res: Response, next: NextFunction) => {
 const {data} = req.body;
+const {company_name, company_goals, company_mission, product_name, product_description, product_features, qna } = req.body;
+
 const payload: Payload = {data};
 console.log('here is the request body');
   // Output the request body
@@ -73,7 +52,21 @@ console.log('here is the request body');
     "messages": [
         {
             "role": "user",
-            "content": `${data}`
+            "content": `The Sustainability Awareness Framework (SusAF) is a tool for sustainable design of software products and services. 
+The SusAF workbook enables you to perform a guided capture analysis of the sustainability of your software. 
+There are 5 dimensions in the SusAF which are social, individual, environmental, economic and technical. 
+There are also 3 orders of effects which are immediate (first order), enabling (second order), and structural (third order). 
+I want you to do a Sustainability Awareness Framework (SusAF) analysis based on the information given here and give me the response in a JSON format. 
+The informations are; 
+Company name: ${company_name } .
+Company goals: ${company_goals } .
+Company mission: ${company_mission} .
+Name of product: ${product_name} and more product ${product_description} and
+Product features: ${product_features} .
+Some SusAF Questions and answers are ${qna}
+For more information.
+You have to provide me with the list of positive and negative impacts in precise words for each of the features in each of the SusAF dimensions mentioned with order of effects. 
+As well as threats and opportunities and possible actions can be taken for the future.`
         }
     ]
     

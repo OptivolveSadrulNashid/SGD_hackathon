@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   api:
-    container_name: api
+    container_name: susAFapi
     restart: always
     build: .
     ports:
