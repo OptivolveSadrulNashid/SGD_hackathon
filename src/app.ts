@@ -59,7 +59,7 @@ async function openAiPostRequest(endpoint: string, requestData: any): Promise<an
   }
 }
 
-app.post("/example", async (req: Request, res: Response, next: NextFunction) => {
+app.post("/api/susai", async (req: Request, res: Response, next: NextFunction) => {
 const {data} = req.body;
 const payload: Payload = {data};
 console.log('here is the request body');
