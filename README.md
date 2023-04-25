@@ -1,4 +1,4 @@
-# SGD_hackathon
+# SDG_hackathon
 
 How to run the APIs
 
