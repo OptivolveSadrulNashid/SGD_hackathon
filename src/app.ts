@@ -63,7 +63,6 @@ app.post("/api/susai", async (req: Request, res: Response, next: NextFunction) =
 const {data} = req.body;
 const payload: Payload = {data};
 console.log('here is the request body');
- console.log(data); 
   // Output the request body
   const requestData1 = {
     "model": "gpt-3.5-turbo",
@@ -82,7 +81,11 @@ console.log('here is the request body');
 
 const response = await openAiPostRequest('completions', requestData1);
 console.log(response); // Output the response from the OpenAI API
-  res.send(response);
+  const result = response.choices[0].message.content;
+  // const parsedresult = result.replace(/(\r\n|\n|\r)/gm, "");
+  // console.log('this is the result');
+  // console.log(parsedresult);
+  res.send(result);
 });
 //=================================================
 
