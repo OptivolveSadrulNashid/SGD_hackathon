@@ -45,7 +45,6 @@ console.log('here is the request body');
   const requestData1 = {
     "model": "gpt-3.5-turbo",
     "temperature": 0,
-    "top_p": 1,
     "frequency_penalty": 0,
     "presence_penalty": 0,
     "messages": [
@@ -60,34 +59,41 @@ console.log('here is the request body');
             Enabling: Enabling of operation and use of a system include any change enabled or induced by the system. Structural: Structural represent structural changes caused by the ongoing operation and use of the socio-technical system. 
             Definition of Sustainability Dimensions (Social, Environmental, Economic, Technical): Social: covers the relationships between individuals and groups. Individual: covers the individual's ability to thrive, exercise their rights, and develop freely. 
             Environmental: covers the use and stewardship of natural resources. Economic: covers the financial aspects and business value. Technical: covers the technical system’s ability to accommodate changes. 
-            I want you to do a Sustainability Awareness Framework (SusAF) analysis based on the information given here and give me the response in a JSON format. 
-            The informations are; 
+            I want you to give me the response in a JSON format based on the information given. 
+            The information are; 
             Company name: ${company_name } .
             Company goals: ${company_goals } .
             Company mission: ${company_mission} .
             Name of product: ${product_name} and more product ${product_description} and
             Product features: ${product_features} .
-            Some SusAF Questions and answers are ${qna}
-            For more information.
+            Some SusAF Questions and answers are: ${qna} for more information.
             You have to provide me:
             The list of positive and negative impacts combined in a sentence in precise words for each of the features as “effect”;
             Order of effects (there might be multiple) and combined in a sentence in precise words as “order”;
             Dimension as “dimension” and combined in a sentence in precise words;
-            As well as threats and opportunities and possible actions can be taken for the future.
-            in the following format: 
+            As well as threats and opportunities and possible actions that can be taken for the future.
+            Please provide the results in the following format: 
             body :{
             company_name: "company name",
             company_goals: "company goals",
             company_mission: "company mission",
             product_name: "product name",
             product_description: "product description",
-          
+            features: [ {
+              "feature": "feature name",
+              "effect": "positive and negative impact",
+              "order": "order of effect",
+              "dimension": "dimension",
+            },
             {
               "feature": "feature name",
               "effect": "positive and negative impact",
               "order": "order of effect",
               "dimension": "dimension",
-            }
+            }],
+            threats: "threats",
+            opportunities: "opportunities",
+            actions: "actions"
           }`
         }
     ]
