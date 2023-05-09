@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "preinstall": "npm i nodemon -g",
     "start": "node ./dist/app.js",
-    "dev": "nodemon -L -e ts --exec \"npm run build && npm start\"",
+    "dev": "npm run build && npm start",
     "build": "tsc"
   },
   "keywords": [],
