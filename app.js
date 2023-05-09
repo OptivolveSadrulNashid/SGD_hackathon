@@ -1,16 +1,42 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+var __awaiter =
+  (this && this.__awaiter) ||
+  function (thisArg, _arguments, P, generator) {
+    function adopt(value) {
+      return value instanceof P
+        ? value
+        : new P(function (resolve) {
+            resolve(value);
+          });
+    }
     return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
+      function fulfilled(value) {
+        try {
+          step(generator.next(value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function rejected(value) {
+        try {
+          step(generator["throw"](value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function step(result) {
+        result.done
+          ? resolve(result.value)
+          : adopt(result.value).then(fulfilled, rejected);
+      }
+      step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
+  };
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
@@ -19,43 +45,55 @@ const app = (0, express_1.default)();
 app.use(express_1.default.json()); //Used to parse JSON bodies
 dotenv_1.default.config(); //Reads .env file and makes it accessible via process.env
 app.get("/hi", (req, res, next) => {
-    res.send("hi SDGs");
+  res.send("hi SDGs");
 });
 function openAiPostRequest(endpoint, requestData) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${process.env.API_KEY}`,
-            },
-        };
-        try {
-            const response = yield axios_1.default.post(`https://api.openai.com/v1/chat/completions`, requestData, config);
-            console.log(`this is the response ${response.data}`);
-            return response.data;
-        }
-        catch (error) {
-            console.error(error);
-            throw new Error(`Failed to make OpenAI API request to ${endpoint}`);
-        }
-    });
+  return __awaiter(this, void 0, void 0, function* () {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.API_KEY}`,
+      },
+    };
+    try {
+      const response = yield axios_1.default.post(
+        `https://api.openai.com/v1/chat/completions`,
+        requestData,
+        config
+      );
+      console.log(`this is the response ${response.data}`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw new Error(`Failed to make OpenAI API request to ${endpoint}`);
+    }
+  });
 }
-app.post("/api/susai", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+app.post("/api/susai", (req, res, next) =>
+  __awaiter(void 0, void 0, void 0, function* () {
     const { data } = req.body;
-    const { company_name, company_goals, company_mission, product_name, product_description, product_features, qna, } = req.body;
+    const {
+      company_name,
+      company_goals,
+      company_mission,
+      product_name,
+      product_description,
+      product_features,
+      qna,
+    } = req.body;
     const payload = { data };
     console.log("here is the request body");
     // Output the request body
     const requestData1 = {
-        model: "gpt-3.5-turbo",
-        temperature: 0,
-        top_p: 1,
-        frequency_penalty: 0,
-        presence_penalty: 0,
-        messages: [
-            {
-                role: "user",
-                content: `The Sustainability Awareness Framework (SusAF) is a tool for sustainable design of software products and services. 
+      model: "gpt-3.5-turbo",
+      temperature: 0,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+      messages: [
+        {
+          role: "user",
+          content: `The Sustainability Awareness Framework (SusAF) is a tool for sustainable design of software products and services. 
             The SusAF workbook enables you to perform a guided capture analysis of the sustainability of your software. 
             There are 5 dimensions in the SusAF which are social, individual, environmental, economic and technical. 
             There are also 3 orders of effects which are immediate (first order), enabling (second order), and structural (third order). 
@@ -79,8 +117,8 @@ app.post("/api/susai", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
             Order of effects (there might be multiple), as “order”;
             Dimension (there might be multiple), as “dimension”;
             As well as threats and opportunities and possible actions can be taken for the future.`,
-            },
-        ],
+        },
+      ],
     };
     const response = yield openAiPostRequest("completions", requestData1);
     console.log(response); // Output the response from the OpenAI API
@@ -89,8 +127,9 @@ app.post("/api/susai", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
     // console.log('this is the result');
     // console.log(parsedresult);
     res.send(result);
-}));
+  })
+);
 //=================================================
-app.listen(process.env.PORT, () => {
-    console.log(`Server is running at ${process.env.PORT}`);
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`Server is running at ${process.env.PORT}`);
 });
