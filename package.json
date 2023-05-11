@@ -5,8 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "npm run build && npm start",
-    "build": "tsc"
+    "dev": "npm run build && npm start"
   },
   "keywords": [],
   "author": "Nashid",
